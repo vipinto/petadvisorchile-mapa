@@ -1723,27 +1723,35 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // -------------------------
 // ESCALAR POPUP SEGÚN ZOOM (SOLO EN MÓVIL)
 // -------------------------
-const baseZoom = map.getZoom();  // por ejemplo 13
-const baseFont = 15;             // tamaño base (px)
+// -------------------------
+// ESCALAR POPUP SEGÚN ZOOM (SOLO MÓVIL)
+// -------------------------
+const isMobile = window.innerWidth <= 768;
+const baseZoom = map.getZoom();   // ej: 13
+const baseFont = 16;              // tamaño base en px
 
 function actualizarTamañoPopups() {
-  // solo aplicar si el ancho de pantalla es de móvil
-  if (window.innerWidth > 768) return;
+  if (!isMobile) return; // en desktop no hace nada
 
   const z = map.getZoom();
-  const factor = 1 + (z - baseZoom) * 0.12; // 12% por nivel de zoom
+
+  // hacer el efecto más notorio al acercar
+  // si subes de 13 a 17 → factor ~ 2
+  const factor = Math.pow(1.25, (z - baseZoom)); 
+
   const popupContents = document.querySelectorAll(".leaflet-popup-content");
 
   popupContents.forEach((el) => {
     el.style.fontSize = (baseFont * factor) + "px";
+    el.style.lineHeight = "1.3";
   });
 }
 
-// Solo enganchamos el evento en móvil
-if (window.innerWidth <= 768) {
+if (isMobile) {
   map.on("zoomend", actualizarTamañoPopups);
-  actualizarTamañoPopups(); // aplicar una vez al inicio
+  actualizarTamañoPopups(); // aplica una vez al inicio
 }
+
 
 
 
