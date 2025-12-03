@@ -42,15 +42,6 @@ servicios.forEach((s) => {
 
   const marker = L.marker([s.lat, s.lng]).addTo(map);
 
-  const popupHtml = `
-    <div>
-      <strong>${s.nombre}</strong><br>
-      <small>${s.descripcion}</small><br>
-      ${s.url ? `<a href="${s.url}" target="_blank">Ver más</a>` : ""}
-    </div>
-  `;
-
-  marker.bindPopup(popupHtml);
   markers.push(marker);
 
   // Cuando el usuario toca un marker:
