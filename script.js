@@ -2,10 +2,11 @@
 const map = L.map("map").setView([-33.45, -70.66], 11);
 
 // Capa base de OpenStreetMap
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: "&copy; OpenStreetMap contributors",
+L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png", {
+  maxZoom: 20,
+  attribution: "&copy; OpenStreetMap contributors & Stamen Design",
 }).addTo(map);
+
 
 // Servicios de prueba
 const servicios = [
