@@ -15,8 +15,7 @@ const servicios = [
     nombre: "Veterinaria Colina",
     lat: -33.3305,
     lng: -70.6783,
-    descripcion: "Urgencias 24 horas",
-    url: "https://ejemplo.cl/servicio/1"
+    descripcion: "Urgencias 24 horas"
   },
   {
     id: 2,
@@ -24,8 +23,7 @@ const servicios = [
     nombre: "Tienda Pet Center",
     lat: -33.4375,
     lng: -70.65,
-    descripcion: "Alimentos y accesorios",
-    url: "https://ejemplo.cl/servicio/2"
+    descripcion: "Alimentos y accesorios"
   }
 ];
 
@@ -37,7 +35,6 @@ servicios.forEach((s) => {
     <div>
       <strong>${s.nombre}</strong><br>
       <small>${s.descripcion}</small><br>
-      <a href="${s.url}" target="_blank">Ver más</a>
     </div>
   `;
 
