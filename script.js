@@ -1,64 +1,43 @@
-// ------------------
-// CONFIG (mantén aquí tu APP_ID, COLLECTION_ID, API_KEY)
-// ------------------
-const APP_ID = "7522455b-4cce-421b-b4c2-d8f633640e50";
-const COLLECTION_ID = "t_759e49a9054b4f60a1b674a6cd110353";
-const API_KEY = "0165hqnms9f8e2w8z36wpvxef"; // pon la misma que ya usabas
-
-// Leer parámetro ?tipo= de la URL
-const params = new URLSearchParams(window.location.search);
-const tipoFiltro = params.get("tipo"); // veterinaria, rescate, etc.
-
-// ------------------
-// MAPA
-// ------------------
+// Crear el mapa centrado en Santiago
 const map = L.map("map").setView([-33.45, -70.66], 11);
 
-// Fondo del mapa (por ahora, OSM clásico)
+// Capa base de OpenStreetMap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
-// Para ajustar el zoom a todos los puntos
-const markers = [];
-
-// ------------------
-// Cargar datos desde Adalo
-// ------------------
-fetch(`https://api.adalo.com/v0/apps/${APP_ID}/collections/${COLLECTION_ID}/records`, {
-  headers: {
-    Authorization: `Bearer ${API_KEY}`,
+// Servicios de prueba
+const servicios = [
+  {
+    id: 1,
+    nombre: "Veterinaria Colina",
+    lat: -33.3305,
+    lng: -70.6783,
+    descripcion: "Urgencias 24 horas",
+    url: "https://ejemplo.cl/servicio/1",
   },
-})
-  .then((res) => res.json())
-  .then((data) => {
-    const servicios = data.records;
+  {
+    id: 2,
+    nombre: "Tienda Pet Center",
+    lat: -33.4375,
+    lng: -70.65,
+    descripcion: "Alimentos y accesorios",
+    url: "https://ejemplo.cl/servicio/2",
+  },
+];
 
-    servicios.forEach((s) => {
-      // Debe tener coordenadas
-      if (!s.latitud || !s.longitud) return;
+// Crear un marcador por cada servicio
+servicios.forEach((s) => {
+  const marker = L.marker([s.lat, s.lng]).addTo(map);
 
-      // Si hay filtro ?tipo= y este registro no coincide, lo saltamos
-      if (tipoFiltro && s.tipo !== tipoFiltro) return;
+  const popupHtml = `
+    <div>
+      <strong>${s.nombre}</strong><br />
+      <small>${s.descripcion}</small><br />
+      <a href="${s.url}" target="_blank">Ver detalle</a>
+    </div>
+  `;
 
-      const marker = L.marker([s.latitud, s.longitud]).addTo(map);
-
-      const popupHtml = `
-        <div>
-          <strong>${s.nombre}</strong><br>
-          <small>Tel: ${s.telefono || "No disponible"}</small>
-        </div>
-      `;
-
-      marker.bindPopup(popupHtml);
-      markers.push(marker);
-    });
-
-    // Ajustar el mapa para que se vean todos los markers
-    if (markers.length > 0) {
-      const group = L.featureGroup(markers);
-      map.fitBounds(group.getBounds().pad(0.2));
-    }
-  })
-  .catch((err) => console.error("Error cargando datos desde Adalo:", err));
+  marker.bindPopup(popupHtml);
+});
