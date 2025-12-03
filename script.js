@@ -1678,3 +1678,46 @@ const servicios = [
   { id: 1677, placeId: "ChIJXUa5oEDPYpYR83hHMsrO01k", nombre: "Zoonosis La Reina", lat: -33.4523824, lng: -70.5291312, telefono: "", tipo: "veterinarias", },
   { id: 1678, placeId: "ChIJNa5iRiTOYpYRgqDwFqww5os", nombre: "Zoonosis Peñalolen", lat: -33.4670488, lng: -70.5590236, telefono: "+56 2 2486 8000", tipo: "veterinarias", },
 ];
+
+// -------------------------
+// INICIALIZAR MAPA
+// -------------------------
+
+// Si hay servicios, centra el mapa en el primero.
+// Si no, usa un centro por defecto (Santiago).
+const centroLat = servicios.length ? servicios[0].lat : -33.45;
+const centroLng = servicios.length ? servicios[0].lng : -70.66;
+
+const map = L.map("map").setView([centroLat, centroLng], 13);
+
+// Fondo de mapa (OpenStreetMap)
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution: "&copy; OpenStreetMap contributors",
+}).addTo(map);
+
+// -------------------------
+// PINTAR MARCADORES
+// -------------------------
+
+servicios.forEach((servicio) => {
+  if (typeof servicio.lat !== "number" || typeof servicio.lng !== "number") {
+    return; // Si falta lat/lng, saltamos este servicio
+  }
+
+  const marker = L.marker([servicio.lat, servicio.lng]).addTo(map);
+
+  // Contenido del popup
+  const popupHtml = `
+    <div style="font-size:14px;">
+      <strong>${servicio.nombre}</strong><br/>
+      <span><b>Teléfono:</b> ${servicio.telefono || "No registrado"}</span><br/>
+      <span><b>Tipo:</b> ${servicio.tipo || "Sin tipo"}</span><br/>
+      <span style="font-size:11px; color:#666;">
+        PlaceID: ${servicio.placeId || "N/A"}
+      </span>
+    </div>
+  `;
+
+  marker.bindPopup(popupHtml);
+});
