@@ -1688,6 +1688,9 @@ const servicios = [
 // -------------------------
 // FUNCIÓN PARA NORMALIZAR TELÉFONO
 // -------------------------
+// -------------------------
+// FUNCIÓN PARA NORMALIZAR TELÉFONO
+// -------------------------
 function normalizarTelefono(fono) {
   if (!fono) return ""; // evita errores
 
@@ -1727,8 +1730,11 @@ servicios.forEach((servicio) => {
 
   const marker = L.marker([servicio.lat, servicio.lng]).addTo(map);
 
-  // ← limpiar teléfono aquí
+  // Teléfono limpio para llamar
   const fonoLink = normalizarTelefono(servicio.telefono);
+
+  // URL de "Cómo llegar" en Google Maps
+  const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${servicio.lat},${servicio.lng}`;
 
   // Contenido del popup
   const popupHtml = `
@@ -1740,6 +1746,9 @@ servicios.forEach((servicio) => {
           : "No registrado"}
       </span><br/>
       <span><b>Tipo:</b> ${servicio.tipo || "Sin tipo"}</span><br/>
+      <a href="${mapsUrl}" target="_blank" rel="noopener" style="font-size:13px; text-decoration:underline; display:inline-block; margin-top:4px;">
+        📍 Cómo llegar
+      </a><br/>
       <span style="font-size:11px; color:#666;">
         PlaceID: ${servicio.placeId || "N/A"}
       </span>
