@@ -1,0 +1,13 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  width: 100%;
+  height: 100vh; /* ocupa el alto completo de la pantalla */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
