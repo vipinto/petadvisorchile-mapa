@@ -3,7 +3,7 @@ const APP_ID = "7522455b-4cce-421b-b4c2-d8f633640e50";
 const COLLECTION_ID = "t_759e49a9054b4f60a1b67a46cd110353";
 
 // API Key de Adalo (ojo: es privada)
-const API_KEY = "Bearer 0165hqnms9f8e2w8z36wpvxef";
+const API_KEY = "016shqnms9f8e2w8z36wpvxef";
 
 // Crear mapa centrado donde quieras
 const map = L.map("map").setView([-33.45, -70.66], 11);
