@@ -7,7 +7,7 @@ body {
 
 #map {
   width: 100%;
-  height: 100vh; /* ocupa el alto completo de la pantalla */
+  height: 100vh; /* el mapa ocupa toda la pantalla */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
 }
