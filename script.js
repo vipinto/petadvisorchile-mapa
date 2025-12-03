@@ -1739,7 +1739,7 @@ servicios.forEach((servicio) => {
   // Contenido del popup
   const popupHtml = `
   <div style="font-size:15px;">
-    <strong style="font-size:16px;">${servicio.nombre}</strong><br/><br/>
+    <strong style="font-size:16px;">${servicio.nombre}</strong><br/>
 
     <b>Teléfono:</b>
     ${servicio.telefono 
@@ -1752,7 +1752,7 @@ servicios.forEach((servicio) => {
     <a href="${mapsUrl}" target="_blank" style="color:#1a73e8; font-size:15px;">
       📍 Cómo llegar
     </a>
-    <br/><br/>
+    <br/>
 
     <span style="font-size:11px; color:#666;">
       PlaceID: ${servicio.placeId || "N/A"}
