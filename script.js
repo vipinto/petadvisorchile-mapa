@@ -1719,6 +1719,29 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
+// -------------------------
+// UBICACIÓN DEL USUARIO (AUTO-CENTRAR)
+// -------------------------
+map.locate({
+  setView: true,   // Mover automáticamente a tu ubicación
+  maxZoom: 16      // Zoom al encontrarla
+});
+
+// Marcador o círculo al encontrar ubicación
+map.on("locationfound", (e) => {
+  L.circleMarker(e.latlng, {
+    radius: 8,
+    color: "#007bff",
+    fillColor: "#3f8cff",
+    fillOpacity: 0.9
+  }).addTo(map).bindPopup("📍 Estás aquí");
+});
+
+// Si falla
+map.on("locationerror", (e) => {
+  console.log("No se pudo obtener ubicación:", e.message);
+});
+
 
 // -------------------------
 // ESCALAR POPUP SEGÚN ZOOM (SOLO EN MÓVIL)
