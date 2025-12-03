@@ -1722,6 +1722,33 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // -------------------------
 // UBICACIÓN DEL USUARIO (AUTO-CENTRAR)
 
+const map = L.map("map").setView([centroLat, centroLng], 13);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution: "&copy; OpenStreetMap contributors",
+}).addTo(map);
+
+// -------------------------
+// UBICACIÓN DEL USUARIO (AUTO-CENTRAR)
+// -------------------------
+map.locate({
+  setView: true,
+  maxZoom: 16
+});
+
+map.on("locationfound", (e) => {
+  L.circleMarker(e.latlng, {
+    radius: 8,
+    color: "#007bff",
+    fillColor: "#3f8cff",
+    fillOpacity: 0.9
+  }).addTo(map).bindPopup("📍 Estás aquí");
+});
+
+map.on("locationerror", (e) => {
+  console.log("No se pudo obtener ubicación:", e.message);
+});
 
 
 // -------------------------
