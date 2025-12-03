@@ -13,7 +13,23 @@
       crossorigin=""
     />
 
+    <!-- Nuestro CSS -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- CSS de respaldo por si style.css no carga -->
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <div id="map"></div>
@@ -25,6 +41,7 @@
       crossorigin=""
     ></script>
 
+    <!-- Nuestro JS -->
     <script src="script.js"></script>
   </body>
 </html>
