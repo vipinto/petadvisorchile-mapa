@@ -1721,14 +1721,17 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // -------------------------
-// ESCALAR POPUP SEGÚN ZOOM
+// ESCALAR POPUP SEGÚN ZOOM (SOLO EN MÓVIL)
 // -------------------------
-const baseZoom = map.getZoom();      // por ejemplo 13
-const baseFont = 15;                 // tamaño base en px
+const baseZoom = map.getZoom();  // por ejemplo 13
+const baseFont = 15;             // tamaño base (px)
 
 function actualizarTamañoPopups() {
+  // solo aplicar si el ancho de pantalla es de móvil
+  if (window.innerWidth > 768) return;
+
   const z = map.getZoom();
-  const factor = 1 + (z - baseZoom) * 0.12; // 12% más por nivel de zoom
+  const factor = 1 + (z - baseZoom) * 0.12; // 12% por nivel de zoom
   const popupContents = document.querySelectorAll(".leaflet-popup-content");
 
   popupContents.forEach((el) => {
@@ -1736,7 +1739,12 @@ function actualizarTamañoPopups() {
   });
 }
 
-map.on("zoomend", actualizarTamañoPopups);
+// Solo enganchamos el evento en móvil
+if (window.innerWidth <= 768) {
+  map.on("zoomend", actualizarTamañoPopups);
+  actualizarTamañoPopups(); // aplicar una vez al inicio
+}
+
 
 
 // -------------------------
