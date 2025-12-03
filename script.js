@@ -1741,13 +1741,13 @@ servicios.forEach((servicio) => {
   <div style="font-size:15px;">
     <strong style="font-size:16px;">${servicio.nombre}</strong><br/><br/>
 
-    <b>Teléfono:</b><br/>
+    <b>Teléfono:</b>
     ${servicio.telefono 
       ? `<a href="${fonoLink}" style="color:#1a73e8; font-size:15px;">${servicio.telefono}</a>` 
       : "No registrado"}
-    <br/><br/>
+    <br/>
 
-    <b>Tipo:</b> ${servicio.tipo || "Sin tipo"}<br/><br/>
+    <b>Tipo:</b> ${servicio.tipo || "Sin tipo"}<br/>
 
     <a href="${mapsUrl}" target="_blank" style="color:#1a73e8; font-size:15px;">
       📍 Cómo llegar
