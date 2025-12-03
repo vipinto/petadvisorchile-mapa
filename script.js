@@ -17,7 +17,6 @@ const tipoFiltro = params.get("tipo"); // ej: ?tipo=veterinarias
 // BASE DE DATOS LOCAL
 // ------------------
 const servicios = [
-  const servicios = [
   { id: 1, placeId: "ChIJbbHvg-_PYpYRqqmTkeShLcM", nombre: "BigMama Senior Dog Hotel", lat: -33.6064831, lng: -70.7425392, telefono: "+56 9 2080 6899", tipo: "hoteles" },
   { id: 2, placeId: "ChIJk8a4LEPbYpYRmO_ZiRFHYhg", nombre: "Break Can", lat: -33.497746, lng: -70.6479466, telefono: "+56 9 8887 7616", tipo: "hoteles" },
   { id: 3, placeId: "ChIJWcXzmSghY5YR0wcHtUEs3Co", nombre: "Cachorrosfinos.cl", lat: -33.7205253, lng: -70.727844, telefono: "+56 9 8727 8041", tipo: "hoteles" },
