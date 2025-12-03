@@ -1696,7 +1696,6 @@ const servicios = [
   { id: 1677, placeId: "ChIJXUa5oEDPYpYR83hHMsrO01k", nombre: "Zoonosis La Reina", lat: -33.4523824, lng: -70.5291312, telefono: "", tipo: "veterinarias" },
   { id: 1678, placeId: "ChIJNa5iRiTOYpYRgqDwFqww5os", nombre: "Zoonosis Peñalolen", lat: -33.4670488, lng: -70.5590236, telefono: "+56 2 2486 8000", tipo: "veterinarias" },
 ];
-];
 
 // Para ajustar el mapa a todos los puntos visibles
 const markers = [];
