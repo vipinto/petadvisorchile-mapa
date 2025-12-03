@@ -1683,11 +1683,6 @@ const servicios = [
 // INICIALIZAR MAPA
 // -------------------------
 
-// Si hay servicios, centra el mapa en el primero.
-// Si no, usa un centro por defecto (Santiago).
-// -------------------------
-// FUNCIÓN PARA NORMALIZAR TELÉFONO
-// -------------------------
 // -------------------------
 // FUNCIÓN PARA NORMALIZAR TELÉFONO
 // -------------------------
@@ -1719,15 +1714,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
-// -------------------------
-// UBICACIÓN DEL USUARIO (AUTO-CENTRAR)
-
-const map = L.map("map").setView([centroLat, centroLng], 13);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: "&copy; OpenStreetMap contributors",
-}).addTo(map);
 
 // -------------------------
 // UBICACIÓN DEL USUARIO (AUTO-CENTRAR)
@@ -1750,10 +1736,6 @@ map.on("locationerror", (e) => {
   console.log("No se pudo obtener ubicación:", e.message);
 });
 
-
-// -------------------------
-// ESCALAR POPUP SEGÚN ZOOM (SOLO EN MÓVIL)
-// -------------------------
 // -------------------------
 // ESCALAR POPUP SEGÚN ZOOM (SOLO MÓVIL)
 // -------------------------
@@ -1766,7 +1748,6 @@ function actualizarTamañoPopups() {
 
   const z = map.getZoom();
 
-  // hacer el efecto más notorio al acercar
   // si subes de 13 a 17 → factor ~ 2
   const factor = Math.pow(1.25, (z - baseZoom)); 
 
@@ -1782,9 +1763,6 @@ if (isMobile) {
   map.on("zoomend", actualizarTamañoPopups);
   actualizarTamañoPopups(); // aplica una vez al inicio
 }
-
-
-
 
 // -------------------------
 // PINTAR MARCADORES
@@ -1804,28 +1782,27 @@ servicios.forEach((servicio) => {
 
   // Contenido del popup
   const popupHtml = `
-  <div style="font-size:15px;">
-    <strong style="font-size:16px;">${servicio.nombre}</strong><br/>
+    <div style="font-size:15px;">
+      <strong style="font-size:16px;">${servicio.nombre}</strong><br/>
 
-    <b>Teléfono:</b>
-    ${servicio.telefono 
-      ? `<a href="${fonoLink}" style="color:#1a73e8; font-size:15px;">${servicio.telefono}</a>` 
-      : "No registrado"}
-    <br/>
+      <b>Teléfono:</b>
+      ${servicio.telefono 
+        ? `<a href="${fonoLink}" style="color:#1a73e8; font-size:15px;">${servicio.telefono}</a>` 
+        : "No registrado"}
+      <br/>
 
-    <b>Tipo:</b> ${servicio.tipo || "Sin tipo"}<br/>
+      <b>Tipo:</b> ${servicio.tipo || "Sin tipo"}<br/>
 
-    <a href="${mapsUrl}" target="_blank" style="color:#1a73e8; font-size:15px;">
-      📍 Cómo llegar
-    </a>
-    <br/>
+      <a href="${mapsUrl}" target="_blank" style="color:#1a73e8; font-size:15px;">
+        📍 Cómo llegar
+      </a>
+      <br/>
 
-    <span style="font-size:11px; color:#666;">
-      PlaceID: ${servicio.placeId || "N/A"}
-    </span>
-  </div>
-`;
-
+      <span style="font-size:11px; color:#666;">
+        PlaceID: ${servicio.placeId || "N/A"}
+      </span>
+    </div>
+  `;
 
   marker.bindPopup(popupHtml);
 });
