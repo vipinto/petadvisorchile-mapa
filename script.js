@@ -9,10 +9,11 @@ const API_KEY = "Bearer 0165hqnms9f8e2w8z36wpvxef";
 const map = L.map("map").setView([-33.45, -70.66], 11);
 
 // Tile minimalista (puedes cambiarlo)
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: "&copy; OpenStreetMap contributors",
+L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png", {
+  maxZoom: 20,
+  attribution: "&copy; OpenStreetMap contributors & Stamen Design",
 }).addTo(map);
+
 
 // Leer servicios desde Adalo
 fetch(`https://api.adalo.com/v2/apps/${APP_ID}/collections/${COLLECTION_ID}/records`, {
