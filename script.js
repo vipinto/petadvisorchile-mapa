@@ -11,6 +11,8 @@ const servicios = [
     telefono: "+56 9 1234 5678",
     tipo: "veterinarias",
   },
+  { id: 2, placeId: "ChIJbbHvg-_PYpYRqqmTkeShLcM", nombre: "BigMama Senior Dog Hotel", lat: -33.6064831, lng: -70.7425392, telefono: "+56 9 2080 6899", tipo: "hoteles", },
+  { id: 3, placeId: "ChIJk8a4LEPbYpYRmO_ZiRFHYhg", nombre: "Break Can", lat: -33.497746, lng: -70.6479466, telefono: "+56 9 8887 7616", tipo: "hoteles", },
   // Aquí puedes agregar más servicios si quieres:
   // {
   //   id: 2,
