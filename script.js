@@ -1721,6 +1721,25 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // -------------------------
+// ESCALAR POPUP SEGÚN ZOOM
+// -------------------------
+const baseZoom = map.getZoom();      // por ejemplo 13
+const baseFont = 15;                 // tamaño base en px
+
+function actualizarTamañoPopups() {
+  const z = map.getZoom();
+  const factor = 1 + (z - baseZoom) * 0.12; // 12% más por nivel de zoom
+  const popupContents = document.querySelectorAll(".leaflet-popup-content");
+
+  popupContents.forEach((el) => {
+    el.style.fontSize = (baseFont * factor) + "px";
+  });
+}
+
+map.on("zoomend", actualizarTamañoPopups);
+
+
+// -------------------------
 // PINTAR MARCADORES
 // -------------------------
 servicios.forEach((servicio) => {
